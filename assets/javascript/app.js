@@ -1,30 +1,12 @@
-function myTrivia() {
-    const output = [];
+var container = $('#trivia');
+var ansContainer = $('#answers');
+var resultsButton = $('#submit');
 
-    $(questions).each(
-        (currentQuestion, questionNumber) => {
-    
-          // we'll want to store the list of answer choices
-          const answers = [];
-    
-          // and for each available answer...
-          for(letter in currentQuestion.answers){
-    
-            // ...add an HTML radio button
-            answers.push(
-              `<label>
-                <input type="radio" name="question${questionNumber}" value="${letter}">
-                ${letter} :
-                ${currentQuestion.answers[letter]}
-              </label>`
-            );
-}
 
-function myAnswers() {}
 
-myTrivia();
 
-$('#submit').on('click' , myAnswers);
+//$('#submit').on('click' , myAnswers);
+
 
 const questions = [{
         question: "Who is the Regional Manager of Dunder Mifflin in season one?",
@@ -148,3 +130,17 @@ const questions = [{
     },
     
 ];
+
+
+
+function displayQuestions() {
+    $('#trivia').text(questions);
+}
+
+
+$(document).ready(function () {
+    displayQuestions();
+});
+
+
+
