@@ -2,171 +2,192 @@
 
 
 var score = 0;
-
+var timeOut = setTimeout('Times up', 60500);
 
 
 
 
 
 var questions = [{
-        question: "Who is the Regional Manager of Dunder Mifflin in season one?",
+    question: "Who is the Regional Manager of Dunder Mifflin in season one?",
 
-        answers: [
-             "Michael Scott",
-             "Jim Halpert",
-             "Dwight Shrut",
-             "David Wallace"
-        ],
+    answers: [
+        "Michael Scott",
+        "Jim Halpert",
+        "Dwight Shrut",
+        "David Wallace"
+    ],
 
-        rightAnswer: "a"
-    },
-    {
-        question: "How many minutes did Michael work for Dunder Mifflin?",
-        
-        answers: [
-             "5,624,100 min",
-             "9,986,000 min",
-             "11,975,245 min",
-             "8,774,268 min"
-        ],
-        rightAnswer: "b"
-    },
+    rightAnswer: 0
+},
+{
+    question: "How many minutes did Michael work for Dunder Mifflin?",
 
-    {
-        question: "What is Holly's middle name?",
+    answers: [
+        "5,624,100 min",
+        "9,986,000 min",
+        "11,975,245 min",
+        "8,774,268 min"
+    ],
+    rightAnswer: 1
+},
 
-        answers: [
-             "Morgan",
-             "Tina",
-             "Molly",
-             "Partridge"
-        ],
+{
+    question: "What is Holly's middle name?",
 
-        rightAnswer: "d"
-    },
-    {
-        question: "Who is the only character to appear in every episode",
+    answers: [
+        "Morgan",
+        "Tina",
+        "Molly",
+        "Partridge"
+    ],
 
-        answers: [
-             "Pam",
-             "Michael",
-             "Kelly",
-             "Dwight"
-        ],
+    rightAnswer: 3
+},
+{
+    question: "Who is the only character to appear in every episode",
 
-        rightAnswer: "d"
-    },
-    {
-        question: "How many seasons of The Office are there?",
+    answers: [
+        "Pam",
+        "Michael",
+        "Kelly",
+        "Dwight"
+    ],
 
-        answers: [
-             "10",
-             "9",
-             "8",
-             "7"
-        ],
+    rightAnswer: 3
+},
+{
+    question: "How many seasons of The Office are there?",
 
-        rightAnswer: "b"
-    },
-    {
-        question: "How many boxes of cookies did Kevin say he wanted to buy?",
+    answers: [
+        "10",
+        "9",
+        "8",
+        "7"
+    ],
 
-        answers: [
-             "50",
-             "40",
-             "triple digits",
-             "he doesn't say"
-        ],
+    rightAnswer: 1
+},
+{
+    question: "How many boxes of cookies did Kevin say he wanted to buy?",
 
-        rightAnswer: "c"
-    },
-    {
-        question: "What is the firt prank Jim pulls on Dwight?",
+    answers: [
+        "50",
+        "40",
+        "triple digits",
+        "he doesn't say"
+    ],
 
-        answers: [
-             "He puts Dwight's stapler in jell-o",
-             "He gift wraps Dwight's desk",
-             "He moves Dwight's desk to the bathroom",
-             "He sends Dwight on a secret FBI mission",
-        ],
+    rightAnswer: 2
+},
+{
+    question: "What is the firt prank Jim pulls on Dwight?",
 
-        rightAnswer: "a"
-    },
-    {
-        question: "What was Andy's nickname at Cornell?",
+    answers: [
+        "He puts Dwight's stapler in jell-o",
+        "He gift wraps Dwight's desk",
+        "He moves Dwight's desk to the bathroom",
+        "He sends Dwight on a secret FBI mission",
+    ],
 
-        answers: [
-             "Nard Dog",
-             "B-Dog",
-             "Boner Champ",
-             "He didn't have a nickname"
-        ],
+    rightAnswer: 0
+},
+{
+    question: "What was Andy's nickname at Cornell?",
 
-        rightAnswer: "c"
-    },
-    {
-        question: "What disease is Michael trying to raise awareness for with the fun run?",
+    answers: [
+        "Nard Dog",
+        "B-Dog",
+        "Boner Champ",
+        "He didn't have a nickname"
+    ],
 
-        answers: [
-             "AIDS",
-             "Measles",
-             "Herpes",
-             "Rabies"
-        ],
+    rightAnswer: 2
+},
+{
+    question: "What disease is Michael trying to raise awareness for with the fun run?",
 
-        rightAnswer: "d"
-    },
-    {
-        question: "What is the name of Angela's cat that she throws through the ceiling?",
+    answers: [
+        "AIDS",
+        "Measles",
+        "Herpes",
+        "Rabies"
+    ],
 
-        answers: [
-             "Bandit",
-             "Garbage",
-             "Sprikles",
-             "Mr. Whiskers"
-        ],
+    rightAnswer: 3
+},
+{
+    question: "What is the name of Angela's cat that she throws through the ceiling?",
 
-        rightAnswer: "a"
-    },
-    
+    answers: [
+        "Bandit",
+        "Garbage",
+        "Sprikles",
+        "Mr. Whiskers"
+    ],
+
+    rightAnswer: 0
+},
+
 ];
-gameStart();
-console.log(questions);
-function gameStart (){
-for(var i = 0; i < questions.length; i++) {
-    
-    var divMaker = $('<div class="quesHold">');
-    
-    var pMaker = $('<p>').text(questions[i].question);
-    
-    divMaker.append(pMaker);
-    
-    $('#trivia').append(divMaker);
-    
-    var ans = $('<ol type="a">');
-    
-    for(var j = 0; j < 4; j++){
-     var li = $('<li>');
-     var label = $('<label>');
-     var input = $('<input type="radio">').attr({name:'gues' + i, value: j});
 
-     label.text(questions[i].answers[j]);
-     label.prepend(input);
-     li.append(label);
-     ans.append(li);
-        
-    }
-    divMaker.append(ans);
+
+$('#submit').hide();
+$('#restart').hide();
+function gameStart() {
+    
+    $('#trivia').show();
+    $('#submit').show();
+    $('#trivia').empty();
+    for (var i = 0; i < questions.length; i++) {
+
+        var divMaker = $('<div class="quesHold">');
+
+        var pMaker = $('<p>').text(questions[i].question);
+
+        divMaker.append(pMaker);
+
+        $('#trivia').append(divMaker);
+
+        var ans = $('<ol type="a">');
+
+        for (var j = 0; j < 4; j++) {
+            var li = $('<li>');
+            var label = $('<label>');
+            var input = $('<input type="radio">').attr({ name: 'gues' + i, value: j });
+
+            label.text(questions[i].answers[j]);
+            label.prepend(input);
+            li.append(label);
+            ans.append(li);
+
+        }
+        divMaker.append(ans);
     }
 }
 
+//When start is clicked load quiz
+$('#start').on('click', function () {
+    $('#start').hide();
+    $('#audio')[0].play();
+    gameStart();
+
+});
 
 
+//When submit is clicked show results and restart button
+$('#submit').on('click', function () {
+    $('#restart').show();   
+    $('#trivia').hide();
+    $('#submit').hide();
 
+});
 
-
-
-
-
-
+//When restart is clicked return to start menu
+$('#restart').on('click', function(){
+    $('#start').show();
+    $('#restart').hide();
+    
+    
+});
 
