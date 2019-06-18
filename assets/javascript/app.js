@@ -1,13 +1,6 @@
-
-
-
 var score = 0;
-var timeOut = setTimeout('Times up', 60500);
-
-
-
-
-
+var clockRunning = false;
+var time = 90;
 var questions = [{
     question: "Who is the Regional Manager of Dunder Mifflin in season one?",
 
@@ -132,13 +125,24 @@ var questions = [{
 ];
 
 
+
 $('#submit').hide();
+
 $('#restart').hide();
+
+
 function gameStart() {
     
+    $('#timer').show();
+    
+    resetTimer();
+    
     $('#trivia').show();
+    
     $('#submit').show();
+    
     $('#trivia').empty();
+    
     for (var i = 0; i < questions.length; i++) {
 
         var divMaker = $('<div class="quesHold">');
@@ -152,13 +156,20 @@ function gameStart() {
         var ans = $('<ol type="a">');
 
         for (var j = 0; j < 4; j++) {
+           
             var li = $('<li>');
+            
             var label = $('<label>');
+            
             var input = $('<input type="radio">').attr({ name: 'gues' + i, value: j });
 
+            
             label.text(questions[i].answers[j]);
+            
             label.prepend(input);
+            
             li.append(label);
+            
             ans.append(li);
 
         }
@@ -166,28 +177,95 @@ function gameStart() {
     }
 }
 
-//When start is clicked load quiz
+
 $('#start').on('click', function () {
+    
     $('#start').hide();
+    
     $('#audio')[0].play();
+    
     gameStart();
 
 });
 
 
-//When submit is clicked show results and restart button
+
 $('#submit').on('click', function () {
-    $('#restart').show();   
+    
+    $('#restart').show();
+    
     $('#trivia').hide();
+    
     $('#submit').hide();
 
+    $('#timer').hide();
+
 });
 
-//When restart is clicked return to start menu
-$('#restart').on('click', function(){
+
+$('#restart').on('click', function () {
+    
     $('#start').show();
+    
     $('#restart').hide();
     
-    
+    $('#timer').hide();
+
+
 });
 
+
+function resetTimer() {
+
+    $("#timer").text("01:30");
+    
+    start();
+    
+    function start() {
+        
+        time = 90;
+
+        if (!clockRunning) {
+            
+            intervalId = setInterval(count, 1000);
+            
+            clockRunning = true;
+        }
+    }
+
+    function count() {
+
+        time--;
+
+        var converted = timeConverter(time);
+        console.log(converted);
+        if (time === 0) {
+            clearInterval(intervalId);
+            clockRunning = false;
+            $('#trivia').hide();
+            $('#timer').hide();
+
+        }
+
+        $("#timer").text(converted);
+    }
+
+    function timeConverter(t) {
+
+        var minutes = Math.floor(t / 60);
+        var seconds = t - (minutes * 60);
+
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+
+        if (minutes === 0) {
+            minutes = "00";
+        }
+        else if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+
+        return minutes + ":" + seconds;
+    }
+}
