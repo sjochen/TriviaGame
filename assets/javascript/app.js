@@ -211,22 +211,19 @@ for(var i=0; i<questions.length; i++){
         //var userAnswer='';
         //userAnswer= $('#gues0-0').attr('value');
        // console.log(userAnswer);
-        answer=$('input[type=radio]:checked').next().html();{
-        if(answer===questions[i].rightAnswer){
+       var userAnswer = $('input[name=gues'+i+']:checked').val();
+       console.log(userAnswer);
+        if(userAnswer===0 && questions[i].rightAnswer===0 || userAnswer===1 && questions[i].rightAnswer===1 || userAnswer===2 && questions[i].rightAnswer===2 || userAnswer===3 && questions[i].rightAnswer===3){
             userScore.correct++;
         }else{
             userScore.incorrect++;
         }
         console.log(userScore);
-        /*if(userAnswer===0 && questions[i].rightAnswer==='a' || userAnswer===1 && questions[i].rightAnswer==='b' || userAnswer===2 && questions[i].rightAnswer==='c' || userAnswer===3 && questions[i].rightAnswer==='d'){
-    
-        }*/
-
-        console.log(questions[i].rightAnswer)
+        //console.log(questions[i].rightAnswer)
     }
 
 }
-}); 
+); 
 
 
 
