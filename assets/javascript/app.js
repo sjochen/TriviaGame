@@ -1,6 +1,7 @@
 var score = 0;
 var clockRunning = false;
 var time = 90;
+var answer = '';
 var questions = [{
     question: "Who is the Regional Manager of Dunder Mifflin in season one?",
 
@@ -123,7 +124,10 @@ var questions = [{
 },
 
 ];
-
+var userScore = {
+    correct: 0,
+    incorrect: 0, 
+    };
 
 
 $('#submit').hide();
@@ -161,7 +165,7 @@ function gameStart() {
             
             var label = $('<label>');
             
-            var input = $('<input type="radio">').attr({ name: 'gues' + i, value: j });
+            var input = $('<input type="radio">').attr({'id': 'gues' + i + '-' + j, 'name': 'gues' + i, 'value': j });
 
             
             label.text(questions[i].answers[j]);
@@ -200,7 +204,29 @@ $('#submit').on('click', function () {
 
     $('#timer').hide();
 
-});
+
+for(var i=0; i<questions.length; i++){
+        
+        //var userAnswer='';
+        //userAnswer= $('#gues0-0').attr('value');
+       // console.log(userAnswer);
+        answer=$('input[type=radio]:checked').next().html();{
+        if(answer===questions[i].rightAnswer){
+            userScore.correct++;
+        }else{
+            userScore.incorrect++;
+        }
+        console.log(userScore);
+        /*if(userAnswer===0 && questions[i].rightAnswer==='a' || userAnswer===1 && questions[i].rightAnswer==='b' || userAnswer===2 && questions[i].rightAnswer==='c' || userAnswer===3 && questions[i].rightAnswer==='d'){
+    
+        }*/
+
+        console.log(questions[i].rightAnswer)
+    }
+
+}
+}); 
+
 
 
 $('#restart').on('click', function () {
@@ -238,7 +264,7 @@ function resetTimer() {
         time--;
 
         var converted = timeConverter(time);
-        console.log(converted);
+        
         if (time === 0) {
             clearInterval(intervalId);
             clockRunning = false;
@@ -269,3 +295,4 @@ function resetTimer() {
         return minutes + ":" + seconds;
     }
 }
+
