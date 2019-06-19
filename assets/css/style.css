@@ -35,3 +35,9 @@ h1 {
   #timer {
     margin: 20px;
   }
+
+  #score {
+    font-size: 25px;
+    border: 15px;
+    border-color: red;
+  }

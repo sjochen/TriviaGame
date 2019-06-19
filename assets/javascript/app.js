@@ -12,7 +12,7 @@ var questions = [{
         "David Wallace"
     ],
 
-    rightAnswer: 0
+    rightAnswer: 'a'
 },
 {
     question: "How many minutes did Michael work for Dunder Mifflin?",
@@ -23,7 +23,7 @@ var questions = [{
         "11,975,245 min",
         "8,774,268 min"
     ],
-    rightAnswer: 1
+    rightAnswer: 'b'
 },
 
 {
@@ -36,7 +36,7 @@ var questions = [{
         "Partridge"
     ],
 
-    rightAnswer: 3
+    rightAnswer: 'd'
 },
 {
     question: "Who is the only character to appear in every episode",
@@ -48,7 +48,7 @@ var questions = [{
         "Dwight"
     ],
 
-    rightAnswer: 3
+    rightAnswer: 'd'
 },
 {
     question: "How many seasons of The Office are there?",
@@ -60,7 +60,7 @@ var questions = [{
         "7"
     ],
 
-    rightAnswer: 1
+    rightAnswer: 'b'
 },
 {
     question: "How many boxes of cookies did Kevin say he wanted to buy?",
@@ -72,7 +72,7 @@ var questions = [{
         "he doesn't say"
     ],
 
-    rightAnswer: 2
+    rightAnswer: 'c'
 },
 {
     question: "What is the firt prank Jim pulls on Dwight?",
@@ -84,7 +84,7 @@ var questions = [{
         "He sends Dwight on a secret FBI mission",
     ],
 
-    rightAnswer: 0
+    rightAnswer: 'a'
 },
 {
     question: "What was Andy's nickname at Cornell?",
@@ -96,7 +96,7 @@ var questions = [{
         "He didn't have a nickname"
     ],
 
-    rightAnswer: 2
+    rightAnswer: 'c'
 },
 {
     question: "What disease is Michael trying to raise awareness for with the fun run?",
@@ -108,7 +108,7 @@ var questions = [{
         "Rabies"
     ],
 
-    rightAnswer: 3
+    rightAnswer: 'd'
 },
 {
     question: "What is the name of Angela's cat that she throws through the ceiling?",
@@ -120,14 +120,11 @@ var questions = [{
         "Mr. Whiskers"
     ],
 
-    rightAnswer: 0
+    rightAnswer: 'a'
 },
 
 ];
-var userScore = {
-    correct: 0,
-    incorrect: 0, 
-    };
+
 
 
 $('#submit').hide();
@@ -136,7 +133,8 @@ $('#restart').hide();
 
 
 function gameStart() {
-    
+    score = 0;
+
     $('#timer').show();
     
     resetTimer();
@@ -146,6 +144,8 @@ function gameStart() {
     $('#submit').show();
     
     $('#trivia').empty();
+
+    
     
     for (var i = 0; i < questions.length; i++) {
 
@@ -205,23 +205,22 @@ $('#submit').on('click', function () {
     $('#timer').hide();
 
 
-for(var i=0; i<questions.length; i++){
-    //var selected = $("input[name='gues0']:checked").val();
-    //console.log(selected);
-        //var userAnswer='';
-        //userAnswer= $('#gues0-0').attr('value');
-       // console.log(userAnswer);
-       var userAnswer = $('input[name=gues'+i+']:checked').val();
-       console.log(userAnswer);
-        if(userAnswer===0 && questions[i].rightAnswer===0 || userAnswer===1 && questions[i].rightAnswer===1 || userAnswer===2 && questions[i].rightAnswer===2 || userAnswer===3 && questions[i].rightAnswer===3){
-            userScore.correct++;
-        }else{
-            userScore.incorrect++;
-        }
-        console.log(userScore);
-        //console.log(questions[i].rightAnswer)
-    }
+    for(var i=0; i<questions.length; i++){
+        var userAnswer = $('input[name=gues'+i+']:checked').val();
+        userAnswer = parseInt(userAnswer);
+        var char = String.fromCharCode(97 + userAnswer);
+        console.log(userAnswer);
+        console.log(char);
+    if(char === questions[i].rightAnswer  || char === questions[i].rightAnswer || char === questions[i].rightAnswer){
+            score++;
+            
+            $('#score').show();
 
+            $('#score').text('Correct Answers ' + score + '/' + questions.length);
+        }
+        console.log(questions[i].rightAnswer)
+        console.log(score);
+    } 
 }
 ); 
 
@@ -234,6 +233,8 @@ $('#restart').on('click', function () {
     $('#restart').hide();
     
     $('#timer').hide();
+
+    $('#score').hide();
 
 
 });
