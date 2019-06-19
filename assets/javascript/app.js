@@ -206,7 +206,8 @@ $('#submit').on('click', function () {
 
 
 for(var i=0; i<questions.length; i++){
-        
+    //var selected = $("input[name='gues0']:checked").val();
+    //console.log(selected);
         //var userAnswer='';
         //userAnswer= $('#gues0-0').attr('value');
        // console.log(userAnswer);
